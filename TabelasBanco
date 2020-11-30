@@ -1,0 +1,48 @@
+-- Table: public.hospede
+
+-- DROP TABLE public.hospede;
+
+CREATE TABLE public.hospede
+(
+    codehospede integer NOT NULL,
+    nome character varying(200) COLLATE pg_catalog."default",
+    cpf character varying(20) COLLATE pg_catalog."default",
+    telefone character varying(20) COLLATE pg_catalog."default",
+    CONSTRAINT hospede_pkey PRIMARY KEY (codehospede)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.hospede
+    OWNER to postgres;
+
+//-----------------------------------------------------------------------------------------\\
+
+-- Table: public.checkin
+
+-- DROP TABLE public.checkin;
+
+CREATE TABLE public.checkin
+(
+    codecheck integer NOT NULL,
+    codehospede integer NOT NULL,
+    data_entrada date,
+    data_saida date,
+    add_veiculo boolean,
+    valortotal double precision,
+    CONSTRAINT checkin_pkey PRIMARY KEY (codecheck),
+    CONSTRAINT checkin_codehospede_fkey FOREIGN KEY (codehospede)
+        REFERENCES public.hospede (codehospede) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.checkin
+    OWNER to postgres;
+    
+    
+    
+    
+    
